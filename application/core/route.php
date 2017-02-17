@@ -6,10 +6,6 @@ class Route
 	static function start()
 	{
 
-		foreach($_POST as $key => $value) {
-			$_POST[$key] = htmlspecialchars($value);
-		}
-
 		$controller_name = 'Main';
 		$action_name = 'index';
 		

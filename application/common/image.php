@@ -41,7 +41,15 @@ function resizeImage($filename, $to_width = 320, $to_height = 240) {
         $im1 = imagecreatetruecolor($new_w, $new_h);
         imagecopyresampled($im1,$im,0,0,0,0,$new_w,$new_h,imagesx($im),imagesy($im));
 
-        imagejpeg($im1, $filename, 100);
+        $newimage = imagecreatetruecolor($to_width, $to_height);
+        $white = imagecolorallocate($newimage, 255, 255, 255);
+        imagefill($newimage, 0, 0, $white);
+
+        $oldw = imagesx($im1);
+        $oldh = imagesy($im1);
+
+        imagecopy($newimage, $im1, ($to_width-$oldw)/2, ($to_height-$oldh)/2, 0, 0, $oldw, $oldh);
+        imagejpeg($newimage, $filename, 100);
 
         imagedestroy($im);
         imagedestroy($im1);
