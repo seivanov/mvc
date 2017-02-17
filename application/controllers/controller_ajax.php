@@ -34,6 +34,7 @@ class Controller_Ajax extends Controller
 				$i_data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $img['data']));
 
 				file_put_contents(BASEPATH . '/web/img/upload/' . $i_name, $i_data);
+				resizeImage(BASEPATH . '/web/img/upload/' . $i_name);
 
 				$model_files->load([
 					'task_id' => $task_id,
